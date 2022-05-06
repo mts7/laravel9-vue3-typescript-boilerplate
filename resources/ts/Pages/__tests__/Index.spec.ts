@@ -1,5 +1,5 @@
-import { shallowMount } from "@vue/test-utils";
-import Index from "../Index.vue";
+import { shallowMount } from '@vue/test-utils';
+import Index from '../Index.vue';
 
 describe('Index.vue', () => {
 	let wrapper;

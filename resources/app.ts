@@ -1,5 +1,5 @@
-import { createApp, h } from "vue";
-import { App, plugin as inertiaPlugin } from "@inertiajs/inertia-vue3";
+import { createApp, h } from 'vue';
+import { App, plugin as inertiaPlugin } from '@inertiajs/inertia-vue3';
 
 const el = document.getElementById('app')!;
 
