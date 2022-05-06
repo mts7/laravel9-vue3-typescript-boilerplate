@@ -1,18 +1,18 @@
 <template lang="pug">
 AppLayout
-    h2 Welcome, {{ getString() }}
+	h2 Welcome, {{ getString() }}
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import AppLayout from '@/Layouts/AppLayout.vue';
+import { defineComponent } from "vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
 
 export default defineComponent({
 	components: {
-		AppLayout,
+		AppLayout
 	},
 	mounted() {
-		this.names.push('Page - Index');
+		this.names.push("Page - Index");
 	},
 	data() {
 		return {
