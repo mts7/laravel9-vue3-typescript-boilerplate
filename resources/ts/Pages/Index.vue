@@ -9,10 +9,10 @@ import AppLayout from "@/Layouts/AppLayout.vue";
 
 export default defineComponent({
 	components: {
-		AppLayout
+		AppLayout,
 	},
 	mounted() {
-		this.names.push("Page - Index");
+		this.names.push('Page - Index');
 	},
 	data() {
 		return {
