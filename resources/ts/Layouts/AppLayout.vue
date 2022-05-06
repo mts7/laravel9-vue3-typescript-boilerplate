@@ -1,39 +1,13 @@
-<template>
-    <div>
-        <h2>Hi, banana.</h2>
+<template lang="pug">
+div
+    h1 Laravel 9 + Vue.js 3 + TypeScript + Pug + Inertia
 
-        <main>
-            <slot></slot>
-        </main>
-    </div>
+    main
+        slot
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
-export default defineComponent({
-	data() {
-		return {
-			showingNavigationDropdown: false,
-		};
-	},
-
-	methods: {
-		switchToTeam(team) {
-			this.$inertia.put(
-				route('current-team.update'),
-				{
-					team_id: team.id,
-				},
-				{
-					preserveState: false,
-				},
-			);
-		},
-
-		logout() {
-			this.$inertia.post(route('logout'));
-		},
-	},
-});
+export default defineComponent({});
 </script>

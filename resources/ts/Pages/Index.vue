@@ -1,16 +1,19 @@
-<template>
-	<div>
-		<h1>Welcome, {{ getString() }}</h1>
-	</div>
+<template lang="pug">
+AppLayout
+    h2 Welcome, {{ getString() }}
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import AppLayout from '@/Layouts/AppLayout.vue';
 
 export default defineComponent({
-    mounted() {
-        this.names.push('Page - Index');
-    },
+	components: {
+		AppLayout,
+	},
+	mounted() {
+		this.names.push('Page - Index');
+	},
 	data() {
 		return {
 			names: [],
