@@ -81,6 +81,33 @@ class MessDetector
 	}
 
 	/**
+	 * Displays the output of the process.
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
+	final public function displayReport(): int
+	{
+		$result = $this->execute();
+		$this->processor->display();
+		return $result;
+	}
+
+	/**
+	 * Sets the renderer as provided.
+	 * @throws \InvalidArgumentException
+	 */
+	final public function setRenderer(string $renderer): void
+	{
+		if (!in_array($renderer, self::RENDERERS, true)) {
+			throw new InvalidArgumentException("{$renderer} is not a valid PHPMD renderer.");
+		}
+
+		$this->renderer = $renderer;
+	}
+
+	/**
 	 * Builds a file name based on either the name passed or the default file name and the type.
 	 * @param string|null $file
 	 * @throws \InvalidArgumentException
@@ -118,32 +145,5 @@ class MessDetector
 			$this->renderer,
 			self::CONFIG_FILE
 		]);
-	}
-
-	/**
-	 * Displays the output of the process.
-	 * @throws \Symfony\Component\Process\Exception\LogicException
-	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
-	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
-	 * @throws \Symfony\Component\Process\Exception\RuntimeException
-	 */
-	final public function displayReport(): int
-	{
-		$result = $this->execute();
-		$this->processor->display();
-		return $result;
-	}
-
-	/**
-	 * Sets the renderer as provided.
-	 * @throws \InvalidArgumentException
-	 */
-	final public function setRenderer(string $renderer): void
-	{
-		if (!in_array($renderer, self::RENDERERS, true)) {
-			throw new InvalidArgumentException("{$renderer} is not a valid PHPMD renderer.");
-		}
-
-		$this->renderer = $renderer;
 	}
 }
