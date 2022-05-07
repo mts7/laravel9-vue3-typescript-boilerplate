@@ -1,13 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Symfony\Component\Process\Process;
 
+/**
+ * Wrapper of Process to handle executing commands.
+ */
 class CommandLineProcessor
 {
 	private Process $process;
 
+	/**
+	 * Displays the output from the process.
+	 */
 	public function display(): void
 	{
 		echo $this->process->getOutput() . PHP_EOL;
@@ -15,8 +23,6 @@ class CommandLineProcessor
 
 	/**
 	 * Executes the mess detector.
-	 * @param array $command
-	 * @return int
 	 */
 	public function execute(array $command): int
 	{

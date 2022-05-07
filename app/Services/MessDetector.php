@@ -1,20 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use InvalidArgumentException;
 
+/**
+ * Executes PHP Mess Detector
+ */
 class MessDetector
 {
 	private const APP_DIRECTORY = 'app';
 
 	private const CONFIG_FILE = 'phpmd.xml';
 
-	private const DEFAULT_FILE_NAME = 'phpmd';
+	public const DEFAULT_FILE_NAME = 'phpmd';
 
 	private const EXECUTABLE = './vendor/bin/phpmd';
-
-	private const REPORT_DIRECTORY = 'reports/';
 
 	private const RENDERERS = [
 		'ansi',
@@ -24,6 +27,8 @@ class MessDetector
 		'text',
 		'xml',
 	];
+
+	public const REPORT_DIRECTORY = 'reports/';
 
 	private const TYPES = [
 		'html',
@@ -35,6 +40,9 @@ class MessDetector
 
 	private string $renderer = 'html';
 
+	/**
+	 * Sets the processor.
+	 */
 	public function __construct(CommandLineProcessor $processor)
 	{
 		$this->processor = $processor;
@@ -43,7 +51,6 @@ class MessDetector
 	/**
 	 * Deletes the existing report, executes the application, and saves the result as a report file.
 	 * @param string|null $file
-	 * @return int
 	 */
 	final public function createReportFile(string $file = null): int
 	{
@@ -57,7 +64,7 @@ class MessDetector
 	 * Deletes a report with the given file name.
 	 * @param string|null $file
 	 */
-	private function deleteReport(string $file = null): void
+	final public function deleteReport(string $file = null): void
 	{
 		$path = self::REPORT_DIRECTORY . $this->buildFileName($file);
 		if (!is_file($path)) {
@@ -70,7 +77,6 @@ class MessDetector
 	/**
 	 * Builds a file name based on either the name passed or the default file name and the type.
 	 * @param string|null $file
-	 * @return string
 	 */
 	private function buildFileName(string $file = null): string
 	{
@@ -78,13 +84,13 @@ class MessDetector
 			throw new InvalidArgumentException("{$this->renderer} cannot be saved as a file.");
 		}
 
+		if ($file === null) {
+			return self::DEFAULT_FILE_NAME . ".{$this->renderer}";
+		}
+
 		$parts = explode('.', $file);
 		if (count($parts) === 2) {
 			return $file;
-		}
-
-		if (is_null($file)) {
-			return self::DEFAULT_FILE_NAME . ".{$this->renderer}";
 		}
 
 		return "{$file}.{$this->renderer}";
@@ -92,7 +98,6 @@ class MessDetector
 
 	/**
 	 * Executes the PHPMD process.
-	 * @return int
 	 */
 	private function execute(): int
 	{
@@ -106,7 +111,6 @@ class MessDetector
 
 	/**
 	 * Displays the output of the process.
-	 * @return int
 	 */
 	final public function displayReport(): int
 	{
@@ -117,8 +121,6 @@ class MessDetector
 
 	/**
 	 * Sets the renderer as provided.
-	 * @param string $renderer
-	 * @return void
 	 */
 	final public function setRenderer(string $renderer): void
 	{

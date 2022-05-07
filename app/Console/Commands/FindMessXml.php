@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use App\Services\MessDetector;
 use Illuminate\Console\Command;
 
+/**
+ * Executes PHP Mess Detector and saves the results.
+ */
 class FindMessXml extends Command
 {
 	/**
