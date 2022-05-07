@@ -51,6 +51,11 @@ class MessDetector
 	/**
 	 * Deletes the existing report, executes the application, and saves the result as a report file.
 	 * @param string|null $file
+	 * @throws \InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
 	final public function createReportFile(string $file = null): int
 	{
@@ -63,6 +68,7 @@ class MessDetector
 	/**
 	 * Deletes a report with the given file name.
 	 * @param string|null $file
+	 * @throws \InvalidArgumentException
 	 */
 	final public function deleteReport(string $file = null): void
 	{
@@ -77,6 +83,7 @@ class MessDetector
 	/**
 	 * Builds a file name based on either the name passed or the default file name and the type.
 	 * @param string|null $file
+	 * @throws \InvalidArgumentException
 	 */
 	private function buildFileName(string $file = null): string
 	{
@@ -98,6 +105,10 @@ class MessDetector
 
 	/**
 	 * Executes the PHPMD process.
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
 	private function execute(): int
 	{
@@ -111,6 +122,10 @@ class MessDetector
 
 	/**
 	 * Displays the output of the process.
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
 	final public function displayReport(): int
 	{
@@ -121,6 +136,7 @@ class MessDetector
 
 	/**
 	 * Sets the renderer as provided.
+	 * @throws \InvalidArgumentException
 	 */
 	final public function setRenderer(string $renderer): void
 	{

@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\App\Console\Commands;
 
 use App\Console\Commands\FindMessJson;
 use App\Services\MessDetector;
 use Mockery;
 use Symfony\Component\Process\Process;
+use Tests\TestCase;
 
 /**
  * Tests for Mess Detector command
@@ -16,7 +17,10 @@ use Symfony\Component\Process\Process;
  */
 class FindMessJsonTest extends TestCase
 {
-	public function setUp(): void
+	/**
+	 * Sets up mock.
+	 */
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -25,6 +29,12 @@ class FindMessJsonTest extends TestCase
 		$process->shouldReceive('getOutput');
 	}
 
+	/**
+	 * @throws \Illuminate\Contracts\Container\BindingResolutionException
+	 * @throws \Illuminate\Contracts\Container\CircularDependencyException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 */
 	final public function testHandle(): void
 	{
 		$command = $this->app->make(FindMessJson::class);

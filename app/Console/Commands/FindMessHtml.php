@@ -28,6 +28,9 @@ class FindMessHtml extends Command
 
 	private MessDetector $messDetector;
 
+	/**
+	 * Constructor
+	 */
 	public function __construct(MessDetector $messDetector)
 	{
 		parent::__construct();
@@ -37,7 +40,11 @@ class FindMessHtml extends Command
 	/**
 	 * Execute the console command.
 	 *
-	 * @return int
+	 * @throws \InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
 	final public function handle(): int
 	{

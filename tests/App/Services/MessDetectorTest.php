@@ -21,7 +21,12 @@ class MessDetectorTest extends TestCase
 
 	private MessDetector $messDetector;
 
-	public function setUp(): void
+	/**
+	 * @throws \Illuminate\Contracts\Container\BindingResolutionException
+	 * @throws \Illuminate\Contracts\Container\CircularDependencyException
+	 * @throws \InvalidArgumentException
+	 */
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -32,6 +37,15 @@ class MessDetectorTest extends TestCase
 		$this->messDetector = $this->app->make(MessDetector::class);
 	}
 
+	/**
+	 * @throws \InvalidArgumentException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
 	final public function testCreateReportFileWithNullName(): void
 	{
 		$this->assertCreateReportFile(
@@ -40,16 +54,41 @@ class MessDetectorTest extends TestCase
 		);
 	}
 
+	/**
+	 * @throws \InvalidArgumentException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
 	final public function testCreateReportFileWithNamePart(): void
 	{
 		$this->assertCreateReportFile('name', MessDetector::REPORT_DIRECTORY . '/name.html');
 	}
 
+	/**
+	 * @throws \InvalidArgumentException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
 	final public function testCreateReportFileWithFullName(): void
 	{
 		$this->assertCreateReportFile('name.ext', MessDetector::REPORT_DIRECTORY . '/name.ext');
 	}
 
+	/**
+	 * @throws \InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
 	final public function testCreateReportFileWithInvalidRenderer(): void
 	{
 		$renderer = 'ansi';
@@ -61,6 +100,14 @@ class MessDetectorTest extends TestCase
 		$this->messDetector->createReportFile('name');
 	}
 
+	/**
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
+	 */
 	final public function testDisplayReport(): void
 	{
 		ob_start();
@@ -69,6 +116,9 @@ class MessDetectorTest extends TestCase
 		$this->assertEquals(1, $value, 'Mock was not set up properly.');
 	}
 
+	/**
+	 * Provides the arrangement and act steps within the callback for the assertion.
+	 */
 	final public function testSetRendererSuccess(): void
 	{
 		$this->assertNoException(function () {
@@ -76,6 +126,9 @@ class MessDetectorTest extends TestCase
 		});
 	}
 
+	/**
+	 * @throws \InvalidArgumentException
+	 */
 	final public function testSetRendererFail(): void
 	{
 		$renderer = 'invalid';
@@ -88,6 +141,13 @@ class MessDetectorTest extends TestCase
 
 	/**
 	 * Creates a report file, then deletes the report file.
+	 * @throws \InvalidArgumentException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
 	private function assertCreateReportFile(?string $file, string $filePath): void
 	{

@@ -15,16 +15,21 @@ class CommandLineProcessor
 
 	/**
 	 * Displays the output from the process.
+	 * @throws \Symfony\Component\Process\Exception\LogicException
 	 */
-	public function display(): void
+	final public function display(): void
 	{
 		echo $this->process->getOutput() . PHP_EOL;
 	}
 
 	/**
 	 * Executes the mess detector.
+	 * @throws \Symfony\Component\Process\Exception\LogicException
+	 * @throws \Symfony\Component\Process\Exception\ProcessSignaledException
+	 * @throws \Symfony\Component\Process\Exception\ProcessTimedOutException
+	 * @throws \Symfony\Component\Process\Exception\RuntimeException
 	 */
-	public function execute(array $command): int
+	final public function execute(array $command): int
 	{
 		$this->process = new Process($command);
 		return $this->process->run();
@@ -32,9 +37,9 @@ class CommandLineProcessor
 
 	/**
 	 * Saves the report output to the specified path.
-	 * @param string|null $file
+	 * @throws \Symfony\Component\Process\Exception\LogicException
 	 */
-	public function save(string $file = null): void
+	final public function save(string $file): void
 	{
 		file_put_contents($file, $this->process->getOutput());
 	}

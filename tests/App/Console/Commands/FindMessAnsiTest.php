@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\App\Console\Commands;
 
 use App\Console\Commands\FindMessAnsi;
 use Mockery;
 use Symfony\Component\Process\Process;
+use Tests\TestCase;
 
 /**
  * Tests for Mess Detector command
@@ -15,7 +16,10 @@ use Symfony\Component\Process\Process;
  */
 class FindMessAnsiTest extends TestCase
 {
-	public function setUp(): void
+	/**
+	 * @throws \InvalidArgumentException
+	 */
+	protected function setUp(): void
 	{
 		parent::setUp();
 
@@ -24,6 +28,12 @@ class FindMessAnsiTest extends TestCase
 		$process->shouldReceive('getOutput')->andReturn('output');
 	}
 
+	/**
+	 * @throws \Illuminate\Contracts\Container\BindingResolutionException
+	 * @throws \Illuminate\Contracts\Container\CircularDependencyException
+	 * @throws \PHPUnit\Framework\ExpectationFailedException
+	 * @throws \SebastianBergmann\RecursionContext\InvalidArgumentException
+	 */
 	final public function testHandle(): void
 	{
 		$command = $this->app->make(FindMessAnsi::class);

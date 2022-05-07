@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<psalm
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	addParamDefaultToDocblockType="true"
+	allowStringToStandInForClass="true"
+	checkForThrowsDocblock="true"
+	findUnusedCode="true"
+	findUnusedVariablesAndParams="true"
+	strictBinaryOperands="true"
+	xmlns="https://getpsalm.org/schema/config"
+	xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+	<projectFiles>
+		<directory name="app"/>
+		<directory name="database/factories"/>
+		<directory name="database/seeders"/>
+		<directory name="tests"/>
+		<ignoreFiles>
+			<directory name="vendor"/>
+			<file name="app/Console/Kernel.php"/>
+			<file name="app/Exceptions/Handler.php"/>
+			<file name="app/Http/Middleware/Authenticate.php"/>
+			<file name="app/Http/Middleware/EncryptCookies.php"/>
+			<file name="app/Http/Middleware/PreventRequestsDuringMaintenance.php"/>
+			<file name="app/Http/Middleware/RedirectIfAuthenticated.php"/>
+			<file name="app/Http/Middleware/TrimStrings.php"/>
+			<file name="app/Http/Middleware/TrustHosts.php"/>
+			<file name="app/Http/Middleware/TrustProxies.php"/>
+			<file name="app/Http/Middleware/VerifyCsrfToken.php"/>
+			<file name="app/Http/Kernel.php"/>
+			<file name="app/Models/User.php"/>
+			<file name="app/Providers/AppServiceProvider.php"/>
+			<file name="app/Providers/AuthServiceProvider.php"/>
+			<file name="app/Providers/BroadcastServiceProvider.php"/>
+			<file name="app/Providers/EventServiceProvider.php"/>
+			<file name="app/Providers/RouteServiceProvider.php"/>
+			<file name="database/factories/UserFactory.php"/>
+		</ignoreFiles>
+	</projectFiles>
+
+	<issueHandlers>
+		<MixedArgument errorLevel="info" />
+		<MixedAssignment errorLevel="info" />
+		<MixedMethodCall errorLevel="info" />
+		<PossiblyUnusedMethod errorLevel="info" />
+		<PropertyNotSetInConstructor errorLevel="suppress" />
+		<UndefinedMagicMethod errorLevel="info" />
+		<UnusedClass errorLevel="suppress" />
+	</issueHandlers>
+
+	<ignoreExceptions>
+		<class name="PHPUnit\Framework\ExpectationFailedException" />
+		<class name="SebastianBergmann\RecursionContext\InvalidArgumentException" />
+	</ignoreExceptions>
+</psalm>
